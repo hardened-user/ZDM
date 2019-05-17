@@ -1,0 +1,12 @@
+---
+# playbook tasks
+
+- hosts: foo.example.com
+  become: yes
+  vars:
+    # overwriting defaults vars
+    memcached_cnf_max_memory_size: 16
+    zabbix_agent_cnf_Server: "localhost"
+    zdm_modules_enabled: ['iostat']
+  roles:
+    - zdm3

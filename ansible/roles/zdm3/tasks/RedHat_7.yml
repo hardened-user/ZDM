@@ -1,0 +1,33 @@
+---
+# tasks file specific for RedHat systems
+
+# NOTE: Currently there is no python34-memcached package in CentOS 7.
+- name: "Install packages: ..."
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python34-pip
+    - python34-six
+  tags:
+    - zdm
+    - packages
+
+
+- name: "PIP-34 install: python-memcached"
+  pip:
+    name: "python-memcached"
+    executable: pip3.4
+  tags:
+    - zdm
+    - pip
+
+
+# NOTE: Currently there is no /bin/python3 symbolic link in CentOS 7.
+- name: "Create a symbolic link: /bin/python3"
+  file:
+    src: "/bin/python3.4"
+    dest: "/bin/python3"
+    owner: "root"
+    group: "root"
+    state: link

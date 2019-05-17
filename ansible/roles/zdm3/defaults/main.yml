@@ -1,0 +1,20 @@
+---
+# defaults vars file
+
+zdm_modules_enabled: []
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Memcached
+zdm_cnf_memcached_version: "1.4.15"
+zdm_cnf_memcached_tool: "memcached-tool"
+zdm_cnf_memcached_addr: "127.0.0.1:11211"
+
+# I/O Stat
+zdm_cnf_iostat_version: "10.1.5"
+zdm_cnf_iostat_discovery_cmd: |-
+  iostat -Nk 2>&1 | sed -e '1,/^Device/d' | awk '/.../ {print $1}' | sed -e '/^\([hsv]d[a-z]\|cciss\|nvme\)/!d'; exit $PIPESTATUS
+# With device mapper (dm):
+# iostat -Nk 2>&1 | sed -e '1,/^Device/d' | awk '/.../ {print $1}' | sed -e '/^\(fd0\|sr0\|loop\|docker\-[0-9]\+:\)/d'; exit $PIPESTATUS
+zdm_cnf_iostat_stat_cmd: "iostat -Nk 2>&1"
+zdm_cnf_iostat_util_cmd: "iostat -Nxd 1 2 2>&1"
+zdm_cnf_iostat_cache_ttl: 29

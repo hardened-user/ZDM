@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+# {{ ansible_managed }}
+# ----------------------------------------------------------------------------------------------------------------------
+import logging
+
+# Common
+cnf_common_log_level = logging.INFO
+cnf_common_log_dir = "{{ zabbix_agent_logs_dir }}"
+cnf_common_timeout = 29
+
+# Memcached
+cnf_memcached_addr = "{{ zdm_cnf_memcached_addr }}"

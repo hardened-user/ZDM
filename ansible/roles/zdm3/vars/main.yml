@@ -1,0 +1,11 @@
+---
+# role vars file
+
+zdm_rolebase_dir: "/opt/zdm3"
+zdm_config_source_dir: "{{ role_path }}/templates/zdmcnf"
+zdm_config_dir: "{{ zdm_rolebase_dir }}/zdmcnf"
+
+# ----------------------------------------------------------------------------------------------------------------------
+zdm_zabbix_agent_conf_source_file: "{{ role_path }}/templates/userparameter.conf.j2"
+zdm_zabbix_agent_conf_file: "{{ zabbix_agent_confd_dir }}/zdm3.conf"
+zdm_sudoers_conf_file: "/etc/sudoers.d/zabbix"

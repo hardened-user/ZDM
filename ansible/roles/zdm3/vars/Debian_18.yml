@@ -1,0 +1,11 @@
+---
+# vars file specific for Debian systems
+
+# ----------------------------------------------------------------------------------------------------------------------
+zdm_python_memcached_package_name: "python3-memcache"
+zdm_mail_log_file: "/var/log/mail.log"
+zdm_sysstat_package_name: "sysstat"
+zdm_ca_cert_package_name: "ca-certificates"
+zdm_python_openssl_package_name: "python-openssl"
+zdm_pflogsumm_package_name: "pflogsumm"
+zdm_conntrack_package_name: "conntrack"

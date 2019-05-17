@@ -1,0 +1,9 @@
+---
+
+- name: "Install package: {{ zdm_sysstat_package_name }}"
+  package:
+    name: "{{ zdm_sysstat_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages

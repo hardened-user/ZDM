@@ -1,0 +1,100 @@
+---
+# tasks file for zdm3
+
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+  tags:
+    - zdm
+
+
+- name: "Include OS-specific tasks"
+  include_tasks: "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+  tags:
+    - zdm
+
+
+- name: "Install package: {{ zdm_python_memcached_package_name }}"
+  package:
+    name: "{{ zdm_python_memcached_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages
+
+
+- name: "Create directories: ..."
+  file:
+    path: "{{ item.path }}"
+    mode:  "{{ item.mode  | default('0755') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    state: directory
+  with_items:
+    - { path: "{{ zdm_rolebase_dir }}" }
+    - { path: "{{ zdm_config_dir }}" }
+  tags:
+    - zdm
+    - tree
+    - config
+
+
+- name: "Sync files: {{ zdm_rolebase_dir }}/..."
+  synchronize:
+    src: "{{ role_path }}/files/"
+    dest: "{{ zdm_rolebase_dir }}/"
+    archive: no
+    checksum: yes
+    links: yes
+    recursive: yes
+    delete: yes
+    rsync_opts:
+      - "--chown=root:root"
+      - "--chmod=D0755"
+      - "--exclude={{ zdm_config_dir | basename }}"
+      - "--exclude=.directory"
+  notify:
+    - "ZDM set file permissions"
+  tags:
+    - zdm
+    - rsync
+    - pycode
+
+
+# TODO: Очистка
+- name: "Generate files: {{ zdm_config_dir }}/..."
+  template:
+    src: "{{ item }}"
+    dest: "{{ zdm_config_dir }}/{{ item | basename | regex_replace('\\.j2$','') }}"
+    owner: "root"
+    group: "zabbix"
+    mode: 0640
+    force: yes
+  with_fileglob:
+    - "{{ zdm_config_source_dir }}/*.j2"
+  tags:
+    - zdm
+    - config
+
+
+- name: "Generate file: {{ zdm_zabbix_agent_conf_file }}"
+  template:
+    src: "{{ zdm_zabbix_agent_conf_source_file }}"
+    dest: "{{ zdm_zabbix_agent_conf_file }}"
+    owner: "root"
+    group: "zabbix"
+    mode: 0640
+    force: yes
+  notify:
+    - "Restart zabbix-agent"
+  tags:
+    - zdm
+    - config
+
+
+### Modules Setup ------------------------------------------------------------------------------------------------------
+- name: "Include OS-specific tasks"
+  include_tasks: "_{{ item }}.yml"
+  with_items:
+    - "{{ zdm_modules_enabled }}"
+  tags:
+    - zdm

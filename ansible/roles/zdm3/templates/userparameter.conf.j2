@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+
+UserParameter=memcached.sh[*],{{ zdm_rolebase_dir }}/memcached_v{{ zdm_cnf_memcached_version }}.sh "$1"
+UserParameter=iostat.py[*],{{ zdm_rolebase_dir }}/iostat_v{{ zdm_cnf_iostat_version }}.py "$1" "$2"
