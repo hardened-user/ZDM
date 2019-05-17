@@ -37,6 +37,8 @@ Some modules need to be explicitly enabled. These include such scripts that requ
 
 
 RU:
+
 Некоторые модули требуется явно включить. К ним относяться ьтакие скрипты, которые требуют дополнительной настройки и / или установки программного обеспечения в системе.
+
 
 * iostat
