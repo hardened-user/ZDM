@@ -1,0 +1,5 @@
+---
+# role vars file
+
+memcached_package_name: "memcached"
+memcached_service_name: "memcached"

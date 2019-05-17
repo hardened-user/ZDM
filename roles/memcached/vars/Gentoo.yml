@@ -1,0 +1,4 @@
+---
+# vars file specific for Gentoo systems
+
+memcached_conf_file: "/etc/conf.d/memcached"

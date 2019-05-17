@@ -1,0 +1,51 @@
+---
+# tasks file for memcached
+
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - memcached
+
+
+- name: "Install package: {{ memcached_package_name }}"
+  package:
+    name: "{{ memcached_package_name }}"
+    state: latest
+  tags:
+    - memcached
+    - packages
+
+
+- name: "Generate file: {{ memcached_conf_file }}"
+  template:
+    src: "{{ ansible_os_family }}.conf.j2"
+    dest: "{{ memcached_conf_file }}"
+    owner: "root"
+    group: "root"
+    mode: 0640
+    force: yes
+  notify:
+    - "Restart memcached"
+  register: memcached_cnf_result
+  tags:
+    - memcached
+    - config
+
+
+- name: "Service enable: {{ memcached_service_name }}"
+  service:
+    name: "{{ memcached_service_name }}"
+    enabled: yes
+  tags:
+    - memcached
+    - service
+
+
+- name: "Service start: {{ memcached_service_name }}"
+  service:
+    name: "{{ memcached_service_name }}"
+    state: started
+  when: not memcached_cnf_result.changed
+  tags:
+    - memcached
+    - service

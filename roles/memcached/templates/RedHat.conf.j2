@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+{% set opt = '-l 127.0.0.1' %}
+{% if memcached_cnf_max_object_size %}
+{% set opt = opt + ' -I ' + memcached_cnf_max_object_size %}
+{% endif %}
+
+PORT="11211"
+USER="memcached"
+MAXCONN="1024"
+CACHESIZE="{{ memcached_cnf_max_memory_size }}"
+OPTIONS="{{ opt }}"

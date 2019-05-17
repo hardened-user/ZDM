@@ -1,0 +1,5 @@
+---
+# defaults vars file
+
+memcached_cnf_max_memory_size: 8
+memcached_cnf_max_object_size:

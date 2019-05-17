@@ -1,0 +1,4 @@
+---
+# vars file specific for Debian systems
+
+memcached_conf_file: "/etc/memcached.conf"

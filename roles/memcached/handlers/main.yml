@@ -1,0 +1,7 @@
+---
+# handlers file
+
+- name: "Restart memcached"
+  service:
+    name: "{{ memcached_service_name }}"
+    state: restarted

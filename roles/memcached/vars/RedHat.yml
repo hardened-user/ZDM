@@ -1,0 +1,4 @@
+---
+# vars file specific for RedHat systems
+
+memcached_conf_file: "/etc/sysconfig/memcached"

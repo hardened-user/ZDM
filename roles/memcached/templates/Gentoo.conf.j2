@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+MEMCACHED_BINARY="/usr/bin/memcached"
+MEMUSAGE="{{ memcached_cnf_max_memory_size }}"
+MEMCACHED_RUNAS="memcached"
+MAXCONN="1024"
+LISTENON="127.0.0.1"
+PORT="11211"
+UDPPORT="0"
+PIDBASE="/var/run/memcached/memcached"
+MISC_OPTS=""
