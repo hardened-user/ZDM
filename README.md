@@ -33,7 +33,7 @@ Optional modules
 ----------------
 EN:
 
-Some modules trebuesyat explicitly enable. These include such scripts that require additional configuration and / or software installation in the system.
+Some modules need to be explicitly enabled. These include such scripts that require additional configuration and / or software installation in the system.
 
 
 RU:
