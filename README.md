@@ -1,6 +1,5 @@
 ZDM - Zabbix Data Mining
 ================
-
 EN:
 
 A set of scripts and templates for data mining in Zabbix
@@ -30,7 +29,15 @@ Ansible example
 
 
 
-Modules
+Optional modules
 ----------------
-* memcached
+EN:
+
+Some modules trebuesyat explicitly enable. These include such scripts that require additional configuration and / or software installation in the system.
+
+
+RU:
+
+Некоторые модули требуесят явно включить. К ним относяться ьтакие скрипты, которые требуют дополнительной настройки и / или установки программного обеспечения в системе.
+
 * iostat
