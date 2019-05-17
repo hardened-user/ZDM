@@ -1,0 +1,7 @@
+---
+# defaults vars file
+
+logrotate_cnf_interval: "daily"
+logrotate_cnf_rotate: 31
+
+logrotate_d_config: {}

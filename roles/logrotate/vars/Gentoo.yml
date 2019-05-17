@@ -1,0 +1,4 @@
+---
+# vars file specific for Gentoo systems
+
+logrotate_package_name: "app-admin/logrotate"

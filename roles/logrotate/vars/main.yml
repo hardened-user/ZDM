@@ -1,0 +1,7 @@
+---
+# role vars file
+
+logrotate_package_name: "logrotate"
+
+logrotate_conf_file: "/etc/logrotate.conf"
+logrotate_confd_dir: "/etc/logrotate.d"

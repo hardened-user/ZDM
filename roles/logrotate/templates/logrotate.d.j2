@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+{% for path in item.paths %}
+{{ path }}
+{% endfor %}
+{
+{% for option in item.options %}
+    {{ option }}
+{% endfor %}
+{% if item.prerotate is defined %}
+    prerotate
+        {{ item.prerotate }}
+    endscript
+{% endif %}
+{% if item.postrotate is defined %}
+    postrotate
+        {{ item.postrotate }}
+    endscript
+{% endif %}
+}

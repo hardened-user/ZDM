@@ -1,0 +1,46 @@
+---
+# tasks file for logrotate
+
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - logrotate
+
+
+- name: "Install package: {{ logrotate_package_name }}"
+  package:
+    name: "{{ logrotate_package_name }}"
+    state: latest
+  tags:
+    - logrotate
+    - packages
+
+
+- name: "Generate file: {{ logrotate_conf_file }}"
+  template:
+    src: "{{ ansible_os_family }}.conf.j2"
+    dest: "{{ logrotate_conf_file }}"
+    owner: "root"
+    group: "root"
+    mode: 0644
+    force: yes
+  tags:
+    - logrotate
+    - config
+
+
+- name: "Generate files: {{ logrotate_confd_dir }}/..."
+  template:
+    src: "logrotate.d.j2"
+    dest: "{{ logrotate_confd_dir }}/{{ item.name }}"
+    owner: "root"
+    group: "root"
+    mode: 0644
+    force: yes
+  with_items:
+    - "{{ logrotate_d_config }}"
+  when:
+   - logrotate_d_config
+  tags:
+    - logrotate
+    - config
