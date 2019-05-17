@@ -12,7 +12,6 @@
 ## Example Playbook
 ```
 ---
-# Замена настроек по-умолчанию для syslog
 
 - name: "Configuration logrotate.d: syslog"
   hosts: vm
