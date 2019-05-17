@@ -1,4 +1,4 @@
-ZDM - Zabbix Data Mining
+Zabbix Data Mining
 ================
 EN:
 
