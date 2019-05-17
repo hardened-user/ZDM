@@ -1,0 +1,37 @@
+---
+# tasks file specific for RedHat systems
+
+- name: "{{ ansible_os_family }} | Configuration firewalld: opening ports ..."
+  firewalld:
+    port="{{ item.port }}/{{ item.proto | default('tcp') }}"
+    zone=public
+    permanent=true
+    state=enabled
+    immediate=true
+  with_items:
+    - "{{ zabbix_agent_fw_ports }}"
+  when:
+    - zabbix_agent_fw_ports
+    - item.open | default(true)
+  tags:
+    - zabbix-agent
+    - firewall
+    - config
+
+
+- name: "{{ ansible_os_family }} | Configuration firewalld: closing ports ..."
+  firewalld:
+    port="{{ item.port }}/{{ item.proto | default('tcp') }}"
+    zone=public
+    permanent=true
+    state=disabled
+    immediate=true
+  with_items:
+    - "{{ zabbix_agent_fw_ports }}"
+  when:
+    - zabbix_agent_fw_ports
+    - not item.open | default(true)
+  tags:
+    - zabbix-agent
+    - firewall
+    - config

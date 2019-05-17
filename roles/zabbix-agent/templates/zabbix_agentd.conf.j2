@@ -1,0 +1,24 @@
+# {{ ansible_managed }}
+
+ListenIP={{ zabbix_agent_cnf_ListenIP }}
+ListenPort={{ zabbix_agent_cnf_ListenPort }}
+Server={{ zabbix_agent_cnf_Server }}
+{% if zabbix_agent_cnf_ServerActive is defined and zabbix_agent_cnf_ServerActive %}
+ServerActive={{ zabbix_agent_cnf_ServerActive }}
+{% else %}
+#ServerActive=
+{% endif %}
+{% if zabbix_agent_cnf_Hostname is defined and zabbix_agent_cnf_Hostname %}
+Hostname={{ zabbix_agent_cnf_Hostname }}
+{% else %}
+#Hostname=
+{% endif %}
+StartAgents={{ zabbix_agent_cnf_StartAgents }}
+PidFile={{ zabbix_agent_cnf_PidFile }}
+LogFile={{ zabbix_agent_cnf_LogFile }}
+LogFileSize={{ zabbix_agent_cnf_LogFileSize }}
+DebugLevel={{ zabbix_agent_cnf_DebugLevel }}
+EnableRemoteCommands={{ zabbix_agent_cnf_EnableRemoteCommands }}
+Timeout={{ zabbix_agent_cnf_Timeout }}
+
+Include=/etc/zabbix/zabbix_agentd.d/*.conf

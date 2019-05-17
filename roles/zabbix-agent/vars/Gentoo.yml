@@ -1,0 +1,5 @@
+---
+# vars file specific for Gentoo systems
+
+zabbix_agent_service_name: "zabbix-agentd"
+zabbix_agent_package_name: "net-analyzer/zabbix"

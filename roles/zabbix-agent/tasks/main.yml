@@ -1,0 +1,118 @@
+---
+# tasks file for zabbix-agent
+
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - zabbix-agent
+
+
+- name: "Include OS-specific pre-tasks"
+  include_tasks: "pre_{{ ansible_os_family }}.yml"
+  tags:
+    - zabbix-agent
+
+
+- name: "Install package: {{ zabbix_agent_package_name }}"
+  package:
+    name: "{{ zabbix_agent_package_name }}"
+    state: latest
+  tags:
+    - zabbix-agent
+    - packages
+
+
+- name: "Create directories: ..."
+  file:
+    path: "{{ item.path }}"
+    mode:  "{{ item.mode  | default('0755') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    state: directory
+  with_items:
+    - { path: "{{ zabbix_agent_conf_dir }}",         mode: "0755", group: "zabbix" }
+    - { path: "{{ zabbix_agent_confd_dir }}",        mode: "0750", group: "zabbix" }
+    - { path: "{{ zabbix_agent_agentscripts_dir }}", mode: "0750", group: "zabbix" }
+    - { path: "{{ zabbix_agent_logs_dir }}",         mode: "0750", owner: "zabbix" }
+  tags:
+    - zabbix-agent
+    - tree
+    - config
+
+
+- name: "Generate file: {{ zabbix_agent_conf_file }}"
+  template:
+    src: "zabbix_agentd.conf.j2"
+    dest: "{{ zabbix_agent_conf_file }}"
+    owner: "root"
+    group: "zabbix"
+    mode: 0640
+    force: yes
+  notify:
+    - "Restart zabbix-agent"
+  register: zabbix_agent_cnf_result
+  tags:
+    - zabbix-agent
+    - config
+
+
+- name: "SELinux seboolean on: zabbix_can_network"
+  seboolean:
+    name: "{{ item }}"
+    state: yes
+    persistent: yes
+  when: ansible_selinux.status == "enabled"
+  with_items:
+    - "zabbix_can_network"
+    - "daemons_enable_cluster_mode"
+  tags:
+    - zabbix-agent
+    - selinux
+    - config
+
+
+- name: "Include OS-specific post-tasks"
+  include_tasks: "post_{{ ansible_os_family }}.yml"
+  tags:
+    - zabbix-agent
+
+
+- name: "Service enable: {{ zabbix_agent_service_name }}"
+  service:
+    name: "{{ zabbix_agent_service_name }}"
+    enabled: yes
+  tags:
+    - zabbix-agent
+    - service
+
+
+- name: "Service start: {{ zabbix_agent_service_name }}"
+  service:
+    name: "{{ zabbix_agent_service_name }}"
+    state: started
+  when: not zabbix_agent_cnf_result.changed
+  tags:
+    - zabbix-agent
+    - service
+
+
+### logrotate ----------------------------------------------------------------------------------------------------------
+- include_role:
+    name: logrotate
+  vars:
+    logrotate_d_config:
+      - name: "{{ zabbix_agent_logrotate_distribution_file_name }}"
+        paths:
+          - "{{ zabbix_agent_logs_dir }}/*.log"
+        options:
+          - daily
+          - rotate 31
+          - ifempty
+          - dateext
+          - compress
+          - nodelaycompress
+          - missingok
+          - copytruncate
+  tags:
+    - logrotate
+    - config

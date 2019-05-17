@@ -1,0 +1,12 @@
+---
+# role vars file
+
+zabbix_agent_service_name: "zabbix-agent"
+zabbix_agent_package_name: "zabbix-agent"
+
+zabbix_agent_conf_dir: "/etc/zabbix"
+zabbix_agent_confd_dir: "{{ zabbix_agent_conf_dir }}/zabbix_agentd.d"
+zabbix_agent_conf_file: "{{ zabbix_agent_conf_dir }}/zabbix_agentd.conf"
+zabbix_agent_agentscripts_dir: "{{ zabbix_agent_conf_dir }}/agentscripts"
+zabbix_agent_logs_dir: "/var/log/zabbix"
+zabbix_agent_logrotate_distribution_file_name: "zabbix-agent"

@@ -1,0 +1,21 @@
+---
+# tasks file specific for RedHat systems
+
+- name: "{{ ansible_os_family }} | Install Zabbix Official Repository"
+  yum:
+    name: "{{ zabbix_agent_RedHat_repo_package }}"
+    state: latest
+  tags:
+    - zabbix-agent
+    - packages
+
+
+- name: "{{ ansible_os_family }} | Remove Zabbix Official Repository non-supported"
+  shell: |
+    yum-config-manager --disable zabbix-non-supported
+  changed_when: None
+  args:
+    executable: /bin/bash
+  tags:
+    - zabbix-agent
+    - packages

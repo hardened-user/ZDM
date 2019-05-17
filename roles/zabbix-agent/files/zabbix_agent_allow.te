@@ -1,0 +1,59 @@
+module zabbix_agent_allow 1.5.6;
+
+require {
+        type home_root_t;
+        type tmp_t;
+        type zabbix_agent_t;
+        type memcache_port_t;
+        type ping_exec_t;
+        type sudo_exec_t;
+        type devlog_t;
+        type kernel_t;
+        type chkpwd_exec_t;
+        type shadow_t;
+        type pam_var_run_t;
+        type sendmail_exec_t;
+        type var_log_t;
+        type postfix_postqueue_exec_t;
+        type postfix_etc_t;
+        type postfix_public_t;
+        type system_dbusd_t;
+        class dbus send_msg;
+        class dir { add_name write };
+        class file { create open read write execute execute_no_trans setattr};
+        class process setcap;
+        class rawip_socket { create read write getopt setopt };
+        class netlink_socket create;
+        class capability { getopt setopt setuid net_raw sys_resource dac_read_search dac_override audit_write };
+        class netlink_audit_socket { create read write nlmsg_relay };
+        class tcp_socket name_connect;
+        class unix_stream_socket connectto;
+        class unix_dgram_socket { create write connect sendto };
+        class sock_file write;
+}
+
+#============= zabbix_agent_t ==============
+allow zabbix_agent_t home_root_t:file { open read };
+allow zabbix_agent_t tmp_t:dir { add_name write };
+allow zabbix_agent_t tmp_t:file { create open read write setattr };
+allow zabbix_agent_t memcache_port_t:tcp_socket name_connect;
+allow zabbix_agent_t ping_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t self:process setcap;
+allow zabbix_agent_t self:rawip_socket { create read write getopt setopt };
+allow zabbix_agent_t self:capability { getopt setopt setuid net_raw sys_resource dac_read_search dac_override audit_write };
+allow zabbix_agent_t self:netlink_socket create;
+allow zabbix_agent_t self:netlink_audit_socket { create read write nlmsg_relay };
+allow zabbix_agent_t self:unix_dgram_socket { create write connect sendto };
+allow zabbix_agent_t sudo_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t devlog_t:sock_file write;
+allow zabbix_agent_t kernel_t:unix_dgram_socket sendto;
+allow zabbix_agent_t chkpwd_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t pam_var_run_t:dir write;
+allow zabbix_agent_t var_log_t:file { open read };
+allow zabbix_agent_t sendmail_exec_t:file execute;
+allow zabbix_agent_t postfix_postqueue_exec_t:file { execute execute_no_trans };
+allow zabbix_agent_t postfix_etc_t:file { open read };
+allow zabbix_agent_t postfix_public_t:sock_file write;
+allow zabbix_agent_t shadow_t:file { open read };
+allow zabbix_agent_t system_dbusd_t:unix_stream_socket connectto;
+allow zabbix_agent_t system_dbusd_t:dbus send_msg;

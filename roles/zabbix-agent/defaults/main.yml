@@ -1,0 +1,21 @@
+---
+# defaults vars file
+
+### zabbix_agentd.conf -------------------------------------------------------------------------------------------------
+zabbix_agent_cnf_ListenIP: "0.0.0.0"
+zabbix_agent_cnf_ListenPort: 10050
+zabbix_agent_cnf_Server: "localhost"
+zabbix_agent_cnf_ServerActive:
+zabbix_agent_cnf_Hostname:
+zabbix_agent_cnf_StartAgents: 5
+zabbix_agent_cnf_PidFile: "/var/run/zabbix/zabbix_agentd.pid"
+zabbix_agent_cnf_LogFile: "/var/log/zabbix/zabbix_agentd.log"
+zabbix_agent_cnf_LogFileSize: 0
+zabbix_agent_cnf_DebugLevel: 3
+zabbix_agent_cnf_EnableRemoteCommands: 1
+zabbix_agent_cnf_Timeout: 30
+
+### firewall -----------------------------------------------------------------------------------------------------------
+zabbix_agent_fw_ports:
+  - { 'port': "{{ zabbix_agent_cnf_ListenPort }}", 'proto': "tcp", 'open': true }
+  - { 'port': "{{ zabbix_agent_cnf_ListenPort }}", 'proto': "udp", 'open': true }

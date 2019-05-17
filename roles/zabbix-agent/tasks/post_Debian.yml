@@ -1,0 +1,17 @@
+---
+# tasks file specific for Debian systems
+
+- name: "Remove directory: /etc/zabbix/zabbix_agentd.conf.d"
+  file:
+    path: "/etc/zabbix/zabbix_agentd.conf.d"
+    state: absent
+  tags:
+    - zabbix-agent
+
+
+- name: "Remove directory: /var/log/zabbix-agent"
+  file:
+    path: "/var/log/zabbix-agent"
+    state: absent
+  tags:
+    - zabbix-agent
