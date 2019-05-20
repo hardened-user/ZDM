@@ -33,7 +33,7 @@ Disable roles:
 
     ansible-playbook example.yml --skip-tags=zabbix-agent,logrotate
     
-Only scripts^
+Only scripts:
 
     ansible-playbook example.yml --tags=zdm
 
