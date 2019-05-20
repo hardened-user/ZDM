@@ -21,6 +21,11 @@ Requirements for the Zabbix Agent host
 * python-memcached
 * memcached
 
+Playbook templates for distribution:
+* RedHat (CentOS): 7
+* Debian (Ubuntu): 18.04
+* Gentoo Linux: default/linux/amd64/17.0/systemd
+
 
 Ansible example
 ----------------
