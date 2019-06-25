@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 17.05.2019
+# 21.06.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import hashlib
 import os
@@ -40,10 +40,10 @@ def memcached_communicate(action, key, ttl=None, data=None):
             # UNLOCK
             return_value = mc.delete(key)
         else:
-            logging.error("Unsupported action: '{}'".format(action))
+            logging.error("Unsupported action :: {}".format(action))
             return None
     except Exception as err:
-        logging.critical("Unexpected Exception: {}\n{}".format(err, "".join(traceback.format_exc())))
+        logging.critical("Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
         return None
     # __________________________________________________________________________
     # noinspection PyProtectedMember
@@ -65,9 +65,9 @@ def memcached_cmd(cmd, key_data, key_lock, timestamp, ttl, timeout, rc_expect=No
         # Проверка данных в кеше
         rd = memcached_communicate('get', key_data)
         if rd is not None:
-            logging.debug(u"Cache hit: {}".format(key_data))
+            logging.debug(u"Cache hit :: key: {}".format(key_data))
             return rd
-        logging.debug(u"Cache miss: {}".format(key_data))
+        logging.debug(u"Cache miss :: key: {}".format(key_data))
         # ______________________________________________________________________
         # Заблокируем работу других запросов на время обновления
         pid_lock = memcached_communicate('lock', key_lock, timeout + 1, os.getpid())  # None/True/<'int'>/<'str'>
@@ -84,9 +84,9 @@ def memcached_cmd(cmd, key_data, key_lock, timestamp, ttl, timeout, rc_expect=No
             if _pid_lock != pid_lock:
                 # NOTE: Антиспам. Повторить вывод, только если меняется блокирующий PID
                 _pid_lock = pid_lock
-                logging.debug(u"Cache waiting unlock from PID: {}".format(pid_lock))
+                logging.debug(u"Cache waiting unlock :: pid: {}".format(pid_lock))
             if time.time() - timestamp >= timeout:
-                logging.error(u"Cache waiting timeout from PID: {}".format(pid_lock))
+                logging.error(u"Cache waiting timeout  :: pid: {}".format(pid_lock))
                 return None
             else:
                 sleep(0.25)
@@ -97,6 +97,70 @@ def memcached_cmd(cmd, key_data, key_lock, timestamp, ttl, timeout, rc_expect=No
             (isinstance(rc_expect, (list, tuple)) and rc not in rc_expect):
         # Error
         rd = None
+        pass
+    else:
+        # Success
+        # NOTE: Пересчитываем TTL с учетом времени на выполнение команды
+        ttl = timestamp + ttl - time.time()
+        if ttl > 1:
+            _tmp = memcached_communicate('set', key_data, ttl, rd)  # None/True/False
+            if _tmp is None or _tmp is False:
+                logging.error("Cache set failed")
+            else:
+                logging.debug("Cached set successful")
+        else:
+            logging.error("The cache has expired before it was written")
+    # __________________________________________________________________________
+    # Разблокировать
+    if memcached_communicate('unlock', key_lock):
+        logging.debug("Cached unlocked")
+    else:
+        logging.error("Cached unlock failed")
+    # __________________________________________________________________________
+    return rd
+
+
+def memcached_fnc(fnc, fargs, key_data, key_lock, timestamp, ttl, timeout):
+    """
+    Выполняет функцию и заносит результат в memcached в случае успешного выполнения (not None).
+    Если результат есть в кеше, то функция не выполняется, а данные отдаются из кеша.
+    """
+    _pid_lock = -1
+    while True:
+        # ______________________________________________________________________
+        # Проверка данных в кеше
+        rd = memcached_communicate('get', key_data)
+        if rd is not None:
+            logging.debug(u"Cache hit :: key: {}".format(key_data))
+            return rd
+        logging.debug(u"Cache miss :: key: {}".format(key_data))
+        # ______________________________________________________________________
+        # Заблокируем работу других запросов на время обновления
+        pid_lock = memcached_communicate('lock', key_lock, timeout + 1, os.getpid())  # None/True/<'int'>/<'str'>
+        if pid_lock is None:
+            # Ошибка
+            logging.error("Cache lock failed")
+            return None
+        elif pid_lock is True:
+            # Продолжить
+            logging.debug("Cache locked")
+            break
+        else:
+            # Ожидать
+            if _pid_lock != pid_lock:
+                # NOTE: Антиспам. Повторить вывод, только если меняется блокирующий PID
+                _pid_lock = pid_lock
+                logging.debug(u"Cache waiting unlock :: pid: {}".format(pid_lock))
+            if time.time() - timestamp >= timeout:
+                logging.error(u"Cache waiting timeout  :: pid: {}".format(pid_lock))
+                return None
+            else:
+                sleep(0.25)
+    # __________________________________________________________________________
+    # Получить свежие данные
+    rd = fnc(*fargs)
+    if rd is None:
+        # Error
         pass
     else:
         # Success

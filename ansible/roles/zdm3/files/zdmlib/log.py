@@ -5,7 +5,7 @@ import logging
 
 _FORMAT_DATE = "%Y/%m/%d %H:%M:%S"
 _FORMAT_INFO = '%(asctime)s %(process)-5d [%(levelname)s] %(message)s'
-_FORMAT_DEBUG = '%(asctime)s %(process)-5d %(module)-12s %(lineno)-3d %(funcName)-20s [%(levelname)s] %(message)s'
+_FORMAT_DEBUG = '%(asctime)s %(process)-5d %(module)-18s %(lineno)-3d %(funcName)-20s [%(levelname)s] %(message)s'
 
 
 def logging_setup(**kwargs):

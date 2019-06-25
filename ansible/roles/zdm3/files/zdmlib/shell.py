@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 14.05.2019
+# 18.06.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import logging
 import subprocess
@@ -13,12 +13,12 @@ from .ps import ps_get_children, ps_kill
 # ======================================================================================================================
 def shell_exec(cmd, timeout=None, rc_expect=None, splitlines=False):
     if not cmd:
-        logging.error("@shell_exec(): Empty command")
+        logging.error("Empty shell command")
         return 1, None
     # __________________________________________________________________________
     trg_timeout = {'value': False}
     _cmd = '''export LC_ALL="C"; export LANG="en_US.UTF-8"; {}'''.format(cmd)
-    logging.debug("Shell command running: ...")
+    logging.debug("Shell command running :: ...")
     child = subprocess.Popen(_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, executable='/bin/bash')
     # __________________________________________________________________________
     if timeout:
@@ -51,14 +51,14 @@ def shell_exec(cmd, timeout=None, rc_expect=None, splitlines=False):
         rc = child.returncode
     # __________________________________________________________________________
     if trg_timeout['value']:
-        logging.error("Shell command timeout. Exit code: {0}\n{1}\n{2}\n{3}\n{2}".format(
+        logging.error("Shell command timeout :: exit_code: {0}\n{1}\n{2}\n{3}\n{2}".format(
             rc, cmd, "  -" * 33, stdout.decode('utf-8')))
     elif (isinstance(rc_expect, int) and rc != rc_expect) or \
             (isinstance(rc_expect, (list, tuple)) and rc not in rc_expect):
-        logging.error("Shell command executed. Exit code: {0}\n{1}\n{2}\n{3}\n{2}".format(
+        logging.error("Shell command executed :: exit_code: {0}\n{1}\n{2}\n{3}\n{2}".format(
             rc, cmd, "  -" * 33, stdout.decode('utf-8')))
     else:
-        logging.debug("Shell command executed. Exit code: {0}\n{1}\n{2}\n{3}\n{2}".format(
+        logging.debug("Shell command executed :: exit_code: {0}\n{1}\n{2}\n{3}\n{2}".format(
             rc, cmd, "  -" * 33, stdout.decode('utf-8')))
     # __________________________________________________________________________
     if splitlines:

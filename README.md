@@ -30,7 +30,7 @@ Playbook templates for distribution:
 Ansible example
 ----------------
 Apply all roles. Includes installation and configuration of `memcached` (required), `zabbix-agent` and `logrotate`:
-Attention: Сheck the default settings for these roles!
+Attention: Check the default settings for these roles!
 
     ansible-playbook example.yml
 
@@ -57,3 +57,4 @@ RU:
 
 
 * iostat
+* gitlab

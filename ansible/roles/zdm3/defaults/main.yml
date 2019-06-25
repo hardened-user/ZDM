@@ -18,3 +18,13 @@ zdm_cnf_iostat_discovery_cmd: |-
 zdm_cnf_iostat_stat_cmd: "iostat -Nk 2>&1"
 zdm_cnf_iostat_util_cmd: "iostat -Nxd 1 2 2>&1"
 zdm_cnf_iostat_cache_ttl: 29
+# GilLab
+zdm_cnf_gitlab_version: "4"
+zdm_cnf_gitlab_cache_ttl: 29
+zdm_cnf_gitlab_api_url: "http://example.com/api/v4"
+zdm_cnf_gitlab_private_token: "*****"
+zdm_cnf_gitlab_runners_discovery_params: |-
+  {
+    'per_page': 100,
+    'scope': "active",
+  }

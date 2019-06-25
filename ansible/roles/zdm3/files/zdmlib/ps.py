@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 14.05.2019
+# 18.06.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import logging
 import os
@@ -22,7 +22,7 @@ def ps_check_pid(pid):
 
 
 def ps_kill(pid, signal=9):
-    logging.debug("Kill PID: {} signal: {}".format(pid, signal))
+    logging.debug("Kill :: pid: {}, signal: {}".format(pid, signal))
     try:
         os.kill(pid, signal)
     except OSError:
@@ -39,7 +39,7 @@ def ps_get_pids():
         pids = [int(x) for x in os.listdir('/proc') if x.isdigit()]
         return sorted(pids)
     except Exception as err:
-        logging.critical("Unexpected Exception: {}\n{}".format(err, "".join(traceback.format_exc())))
+        logging.critical("Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
         return None
 
 
@@ -51,10 +51,10 @@ def ps_get_ppid(pid):
                     return int(line.split()[1])
         return None
     except IOError as err:
-        logging.error("IOError Exception: {}\n{}".format(err, "".join(traceback.format_exc())))
+        logging.error("IOError Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
         return None
     except Exception as err:
-        logging.critical("Unexpected Exception: {}\n{}".format(err, "".join(traceback.format_exc())))
+        logging.critical("Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
         return None
 
 

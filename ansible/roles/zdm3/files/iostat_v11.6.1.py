@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 15.05.2019
+# 18.06.2019
 # ----------------------------------------------------------------------------------------------------------------------
 # USAGE: discovery
 # USAGE: <device> <metric>
@@ -94,7 +94,7 @@ def main():
 def get_stat_metric(data, device, metric):
     columns = ["Device", "tps", "kB_read_s", "kB_wrtn_s", "kB_read", "kB_wrtn"]
     if metric not in columns:
-        logging.error("Unsupported metric: {}".format(metric))
+        logging.error("Unsupported metric :: {}".format(metric))
         return None
     for row in data:
         row = row.decode('utf-8', 'replace')
@@ -105,7 +105,7 @@ def get_stat_metric(data, device, metric):
             continue
         return _tmp[columns.index(metric)]
     # __________________________________________________________________________
-    logging.error("Device not found: {}".format(device))
+    logging.error("Device not found :: {}".format(device))
     return None
 
 
@@ -113,7 +113,7 @@ def get_util_metric(data, device, metric):
     columns = ['Device', 'r_s', 'w_s', 'rkB_s', 'wkB_s', 'rrqm_s', 'wrqm_s', 'rrqm', 'wrqm',
                'r_await', 'w_await', 'aqu-sz', 'rareq-sz', 'wareq-sz', 'svctm', 'util']
     if metric not in columns:
-        logging.error("Unsupported metric: {}".format(metric))
+        logging.error("Unsupported metric :: {}".format(metric))
         return None
     # WARNING: Чтение данных в обратном порядке
     for row in reversed(data):
@@ -125,7 +125,7 @@ def get_util_metric(data, device, metric):
             continue
         return _tmp[columns.index(metric)]
     # __________________________________________________________________________
-    logging.error("Device not found: {}".format(device))
+    logging.error("Device not found :: {}".format(device))
     return None
 
 
