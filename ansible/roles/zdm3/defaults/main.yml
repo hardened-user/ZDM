@@ -23,7 +23,7 @@ zdm_cnf_iostat_cache_ttl: 29
 zdm_cnf_nginx_version: "1.10.3"
 zdm_cnf_nginx_stub_status_url: "http://127.0.0.1/stub_status"
 zdm_cnf_nginx_allow_redirects: True
-zdm_cnf_nginx_cache_ttl: 5
+zdm_cnf_nginx_cache_ttl: 59
 
 # gitlab ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_gitlab_version: "4"
