@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 18.06.2019
+# 23.07.2019
 # ----------------------------------------------------------------------------------------------------------------------
 # USAGE: discovery
 # USAGE: <device> <metric>
@@ -55,7 +55,7 @@ def main():
         key_data = "{}_{}_data".format(_MODULE_NAME, "stat")
         key_lock = "{}_{}_lock".format(_MODULE_NAME, "stat")
         cmd = cnf_iostat_stat_cmd
-        rd = memcached_cmd(cmd, key_data, key_lock, _STARTUP_TS, _CACHE_TTL, cnf_common_timeout,
+        rd = memcached_cmd(cmd, key_data, key_lock, _CACHE_TTL, _STARTUP_TS, cnf_common_timeout,
                            rc_expect=0, splitlines=True)  # <'list'>
         if rd is None:
             print_to_zabbix("ZBX_ERROR")
@@ -71,7 +71,7 @@ def main():
         key_data = "{}_{}_data".format(_MODULE_NAME, "util")
         key_lock = "{}_{}_lock".format(_MODULE_NAME, "util")
         cmd = cnf_iostat_util_cmd
-        rd = memcached_cmd(cmd, key_data, key_lock, _STARTUP_TS, _CACHE_TTL, cnf_common_timeout,
+        rd = memcached_cmd(cmd, key_data, key_lock, _CACHE_TTL, _STARTUP_TS, cnf_common_timeout,
                            rc_expect=0, splitlines=True)  # <'list'>
         if rd is None:
             print_to_zabbix("ZBX_ERROR")

@@ -1,0 +1,9 @@
+---
+
+- name: "Install package: {{ zdm_python_requests_package_name }}"
+  package:
+    name: "{{ zdm_python_requests_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages

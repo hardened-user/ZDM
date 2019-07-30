@@ -37,7 +37,7 @@ Attention: Check the default settings for these roles!
 Disable roles:
 
     ansible-playbook example.yml --skip-tags=zabbix-agent,logrotate
-    
+
 Only scripts:
 
     ansible-playbook example.yml --tags=zdm
@@ -57,4 +57,5 @@ RU:
 
 
 * iostat
+* nginx
 * gitlab

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 21.06.2019
+# 23.07.2019
 # ----------------------------------------------------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/api/runners.html
 # ----------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ def main():
         key_data = "{}_get_{}_data".format(_MODULE_NAME, args.runner)
         key_lock = "{}_get_{}_lock".format(_MODULE_NAME, args.runner)
         fargs = (cnf_gitlab_api_url, cnf_gitlab_private_token, args.runner, cnf_common_timeout)
-        rd = memcached_fnc(gitlab_runners_get, fargs, key_data, key_lock, _STARTUP_TS, _CACHE_TTL, cnf_common_timeout)
+        rd = memcached_fnc(gitlab_runners_get, fargs, key_data, key_lock, _CACHE_TTL, _STARTUP_TS, cnf_common_timeout)
         if rd is None or not isinstance(rd, dict):
             print_to_zabbix("ZBX_ERROR")
             return False

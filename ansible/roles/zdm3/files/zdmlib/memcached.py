@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 21.06.2019
+# 23.07.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import hashlib
 import os
@@ -54,7 +54,7 @@ def memcached_communicate(action, key, ttl=None, data=None):
     return return_value
 
 
-def memcached_cmd(cmd, key_data, key_lock, timestamp, ttl, timeout, rc_expect=None, splitlines=False):
+def memcached_cmd(cmd, key_data, key_lock, ttl, timestamp, timeout, rc_expect=None, splitlines=False):
     """
     Выполняет shell команду и заносит STDOUT в memcached в случае успешного выполнения.
     Если результат выполнения команды есть в кеше, то команда не выполняется, а STDOUT отдается из кеша.
@@ -120,7 +120,7 @@ def memcached_cmd(cmd, key_data, key_lock, timestamp, ttl, timeout, rc_expect=No
     return rd
 
 
-def memcached_fnc(fnc, fargs, key_data, key_lock, timestamp, ttl, timeout):
+def memcached_fnc(fnc, fargs, key_data, key_lock, ttl, timestamp, timeout):
     """
     Выполняет функцию и заносит результат в memcached в случае успешного выполнения (not None).
     Если результат есть в кеше, то функция не выполняется, а данные отдаются из кеша.
