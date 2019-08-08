@@ -25,6 +25,12 @@ zdm_cnf_nginx_stub_status_url: "http://127.0.0.1/stub_status"
 zdm_cnf_nginx_allow_redirects: True
 zdm_cnf_nginx_cache_ttl: 59
 
+# apache ---------------------------------------------------------------------------------------------------------------
+zdm_cnf_apache_version: "2.4.6"
+zdm_cnf_apache_server_status_url: "http://127.0.0.1/server-status"
+zdm_cnf_apache_allow_redirects: True
+zdm_cnf_apache_cache_ttl: 59
+
 # gitlab ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_gitlab_version: "4"
 zdm_cnf_gitlab_cache_ttl: 29

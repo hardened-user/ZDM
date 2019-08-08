@@ -58,4 +58,5 @@ RU:
 
 * iostat
 * nginx
+* apache
 * gitlab
