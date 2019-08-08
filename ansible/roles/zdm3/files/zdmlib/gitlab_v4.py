@@ -28,7 +28,7 @@ def gitlab_runners_list(api_url: str, private_token: str, params=None, timeout=3
         return None
     # __________________________________________________________________________
     if resp.status_code != 200 or not isinstance(data, list):
-        logging.critical("Failed GET request :: {} {}\n{}\n\n{}".format(
+        logging.critical("HTTP failure response :: {} {}\n{}\n\n{}".format(
             resp.status_code, resp.reason,
             '\n'.join("{}: {}".format(k, v) for k, v in resp.headers.items()),
             "{}\n".format(resp.text) if resp.text else ''))
@@ -63,7 +63,7 @@ def gitlab_runners_get(api_url: str, private_token: str, runner_id, timeout=30) 
         logging.error("Runner not found :: {}".format(runner_id))
         return None
     elif resp.status_code != 200 or not isinstance(data, dict):
-        logging.critical("Failed GET request :: {} {}\n{}\n\n{}".format(
+        logging.critical("HTTP failure response :: {} {}\n{}\n\n{}".format(
             resp.status_code, resp.reason,
             '\n'.join("{}: {}".format(k, v) for k, v in resp.headers.items()),
             "{}\n".format(resp.text) if resp.text else ''))

@@ -91,38 +91,35 @@ def get_stub_status(url: str, timeout: int, allow_redirects: bool) -> (None, str
         return None
     # __________________________________________________________________________
     if resp.status_code != 200 or not isinstance(data, str):
-        logging.critical("Failed GET request :: {} {}\n{}\n\n{}".format(
+        logging.critical("HTTP failure response :: {} {}\n{}\n\n{}".format(
             resp.status_code, resp.reason,
             '\n'.join("{}: {}".format(k, v) for k, v in resp.headers.items()),
             "{}\n".format(resp.text) if resp.text else ''))
         return None
+    else:
+        logging.debug("HTTP received response :: {} {}\n{}\n\n{}".format(
+            resp.status_code, resp.reason,
+            '\n'.join("{}: {}".format(k, v) for k, v in resp.headers.items()),
+            "{}\n".format(resp.text) if resp.text else ''))
     # __________________________________________________________________________
     return data
 
 
 def get_status_metric(data: str, metric: str) -> (None, str):
-    re_active = re.compile(r"Active connections:\s+(\d+)", re.UNICODE | re.IGNORECASE)
-    re_accepts = re.compile(r"(\d+)\s+\d+\s+\d+", re.UNICODE | re.IGNORECASE)
-    re_handled = re.compile(r"\d+\s+(\d+)\s+\d+", re.UNICODE | re.IGNORECASE)
-    re_requests = re.compile(r"\d+\s+\d+\s+(\d+)", re.UNICODE | re.IGNORECASE)
-    re_reading = re.compile(r"Reading:\s+(\d+)", re.UNICODE | re.IGNORECASE)
-    re_writing = re.compile(r"Writing:\s+(\d+)", re.UNICODE | re.IGNORECASE)
-    re_waiting = re.compile(r"Waiting:\s+(\d+)", re.UNICODE | re.IGNORECASE)
-    # __________________________________________________________________________
     if metric == "active":
-        re_metric = re_active
+        re_metric = re.compile(r"Active connections:\s+(\d+)", re.UNICODE | re.IGNORECASE)
     elif metric == "accepts":
-        re_metric = re_accepts
+        re_metric = re.compile(r"(\d+)\s+\d+\s+\d+", re.UNICODE | re.IGNORECASE)
     elif metric == "handled":
-        re_metric = re_handled
+        re_metric = re.compile(r"\d+\s+(\d+)\s+\d+", re.UNICODE | re.IGNORECASE)
     elif metric == "requests":
-        re_metric = re_requests
+        re_metric = re.compile(r"\d+\s+\d+\s+(\d+)", re.UNICODE | re.IGNORECASE)
     elif metric == "reading":
-        re_metric = re_reading
+        re_metric = re.compile(r"Reading:\s+(\d+)", re.UNICODE | re.IGNORECASE)
     elif metric == "writing":
-        re_metric = re_writing
+        re_metric = re.compile(r"Writing:\s+(\d+)", re.UNICODE | re.IGNORECASE)
     elif metric == "waiting":
-        re_metric = re_waiting
+        re_metric = re.compile(r"Waiting:\s+(\d+)", re.UNICODE | re.IGNORECASE)
     else:
         logging.error("Unsupported metric :: {}".format(metric))
         return None
