@@ -2,12 +2,12 @@ Zabbix Data Mining
 ================
 EN:
 
-A set of scripts and templates for data mining in Zabbix
+A set of scripts and templates for data mining in Zabbix.
 
 
 RU:
 
-Набор скриптов и шаблонов для сбора данных в Zabbix
+Набор скриптов и шаблонов для сбора данных в Zabbix.
 
 
 Requirements for the Zabbix Server host
@@ -29,7 +29,8 @@ Playbook templates for distribution:
 
 Ansible example
 ----------------
-Apply all roles. Includes installation and configuration of `memcached` (required), `zabbix-agent` and `logrotate`:
+Apply all roles. Includes installation and configuration of `memcached` (required), `zabbix-agent` and `logrotate`.
+
 Attention: Check the default settings for these roles!
 
     ansible-playbook example.yml
