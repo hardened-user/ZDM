@@ -61,3 +61,8 @@ RU:
 * nginx
 * apache
 * gitlab
+
+
+
+See also [wiki](https://wiki.enchtex.info/handmade/zabbix/zabbix_data_mining) page.
+
