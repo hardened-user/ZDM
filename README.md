@@ -44,17 +44,21 @@ Only scripts:
     ansible-playbook example.yml --tags=zdm
 
 
-
-Optional modules
+Modules
 ----------------
+
+* memcached
+* ping
+
+
 EN:
 
-Some modules need to be explicitly enabled. These include such scripts that require additional configuration and / or software installation in the system.
+Some modules must be specified in the `zdm_modules_enabled` variable. These include such scripts that require additional configuration and / or software installation in the system.
 
 
 RU:
 
-Некоторые модули требуется явно включить. К ним относятся такие скрипты, которые требуют дополнительной настройки и / или установки программного обеспечения в системе.
+Некоторые модули требуется явно указать в переменной `zdm_modules_enabled`. К ним относятся такие скрипты, которые требуют дополнительной настройки и / или установки программного обеспечения в системе.
 
 
 * iostat
