@@ -31,6 +31,11 @@ zdm_cnf_apache_server_status_url: "http://127.0.0.1/server-status"
 zdm_cnf_apache_allow_redirects: True
 zdm_cnf_apache_cache_ttl: 59
 
+# ping -----------------------------------------------------------------------------------------------------------------
+zdm_cnf_ping_version: "20121221"
+zdm_cnf_ping_cmd: "ping -n -W5 -i 0.3 -c4 '{ADDR}' 2>&1"
+zdm_cnf_ping_cache_ttl: 29
+
 # gitlab ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_gitlab_version: "4"
 zdm_cnf_gitlab_cache_ttl: 29

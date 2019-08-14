@@ -4,4 +4,5 @@ UserParameter=memcached.sh[*],{{ zdm_rolebase_dir }}/memcached_v{{ zdm_cnf_memca
 UserParameter=iostat.py[*],{{ zdm_rolebase_dir }}/iostat_v{{ zdm_cnf_iostat_version }}.py "$1" "$2"
 UserParameter=nginx.py[*],{{ zdm_rolebase_dir }}/nginx_v{{ zdm_cnf_nginx_version }}.py "$1" "$2" "$3" "$4"
 UserParameter=apache.py[*],{{ zdm_rolebase_dir }}/apache_v{{ zdm_cnf_apache_version }}.py "$1" "$2" "$3" "$4"
+UserParameter=ping.py[*],{{ zdm_rolebase_dir }}/ping_v{{ zdm_cnf_ping_version }}.py "$1" "$2" "$3"
 UserParameter=gitlab_runners.py[*],{{ zdm_rolebase_dir }}/gitlab_runners_v{{ zdm_cnf_gitlab_version }}.py "$1" "$2"

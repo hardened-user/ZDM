@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 20.06.2019
+# 13.08.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import argparse
 import logging
@@ -16,6 +16,11 @@ class MyArgumentParser(argparse.ArgumentParser):
     def error(self, message):
         logging.error(message)
         sys.exit(2)
+
+
+class SafeFormatDict(dict):
+    def __missing__(self, key):
+        return '{' + key + '}'
 
 
 # ======================================================================================================================

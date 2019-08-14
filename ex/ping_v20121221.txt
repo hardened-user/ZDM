@@ -1,0 +1,9 @@
+PING ya.ru (87.250.250.242) 56(84) bytes of data.
+64 bytes from 87.250.250.242: icmp_seq=1 ttl=54 time=14.4 ms
+64 bytes from 87.250.250.242: icmp_seq=2 ttl=54 time=14.5 ms
+64 bytes from 87.250.250.242: icmp_seq=3 ttl=54 time=14.4 ms
+64 bytes from 87.250.250.242: icmp_seq=4 ttl=54 time=14.4 ms
+
+--- ya.ru ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 902ms
+rtt min/avg/max/mdev = 14.427/14.473/14.504/0.150 ms
