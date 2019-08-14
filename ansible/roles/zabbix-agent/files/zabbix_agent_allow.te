@@ -1,4 +1,4 @@
-module zabbix_agent_allow 1.5.6;
+module zabbix_agent_allow 1.5.7;
 
 require {
         type home_root_t;
@@ -18,11 +18,12 @@ require {
         type postfix_etc_t;
         type postfix_public_t;
         type system_dbusd_t;
+        type systemd_logind_t;
         class dbus send_msg;
         class dir { add_name write };
         class file { create open read write execute execute_no_trans setattr};
         class process setcap;
-        class rawip_socket { create read write getopt setopt };
+        class rawip_socket { create read write getopt setopt bind };
         class netlink_socket create;
         class capability { getopt setopt setuid net_raw sys_resource dac_read_search dac_override audit_write };
         class netlink_audit_socket { create read write nlmsg_relay };
@@ -39,7 +40,7 @@ allow zabbix_agent_t tmp_t:file { create open read write setattr };
 allow zabbix_agent_t memcache_port_t:tcp_socket name_connect;
 allow zabbix_agent_t ping_exec_t:file { execute execute_no_trans };
 allow zabbix_agent_t self:process setcap;
-allow zabbix_agent_t self:rawip_socket { create read write getopt setopt };
+allow zabbix_agent_t self:rawip_socket { create read write getopt setopt bind };
 allow zabbix_agent_t self:capability { getopt setopt setuid net_raw sys_resource dac_read_search dac_override audit_write };
 allow zabbix_agent_t self:netlink_socket create;
 allow zabbix_agent_t self:netlink_audit_socket { create read write nlmsg_relay };
@@ -57,3 +58,4 @@ allow zabbix_agent_t postfix_public_t:sock_file write;
 allow zabbix_agent_t shadow_t:file { open read };
 allow zabbix_agent_t system_dbusd_t:unix_stream_socket connectto;
 allow zabbix_agent_t system_dbusd_t:dbus send_msg;
+allow zabbix_agent_t systemd_logind_t:dbus send_msg;
