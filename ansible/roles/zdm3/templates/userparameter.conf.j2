@@ -1,6 +1,7 @@
 # {{ ansible_managed }}
 
 UserParameter=memcached.sh[*],{{ zdm_rolebase_dir }}/memcached_v{{ zdm_cnf_memcached_version }}.sh "$1"
+UserParameter=conntrack.sh[*],{{ zdm_rolebase_dir }}/conntrack_v{{ zdm_cnf_conntrack_version }}.sh "$1" "$2" "$3"
 UserParameter=iostat.py[*],{{ zdm_rolebase_dir }}/iostat_v{{ zdm_cnf_iostat_version }}.py "$1" "$2"
 UserParameter=nginx.py[*],{{ zdm_rolebase_dir }}/nginx_v{{ zdm_cnf_nginx_version }}.py "$1" "$2" "$3" "$4"
 UserParameter=apache.py[*],{{ zdm_rolebase_dir }}/apache_v{{ zdm_cnf_apache_version }}.py "$1" "$2" "$3" "$4"

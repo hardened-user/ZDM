@@ -5,8 +5,13 @@ zdm_modules_enabled: []
 
 # memcached ------------------------------------------------------------------------------------------------------------
 zdm_cnf_memcached_version: "1.4.15"
-zdm_cnf_memcached_tool: "memcached-tool"
+zdm_cnf_memcached_tool_cmd: "memcached-tool"
 zdm_cnf_memcached_addr: "127.0.0.1:11211"
+
+# conntrack ------------------------------------------------------------------------------------------------------------
+zdm_cnf_conntrack_version: "1.4.4"
+zdm_cnf_conntrack_abs_path: "/usr/sbin/conntrack"
+zdm_cnf_conntrack_cmd: "sudo {{ zdm_cnf_conntrack_abs_path }}"
 
 # iostat ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_iostat_version: "10.1.5"

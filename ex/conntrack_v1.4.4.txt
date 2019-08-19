@@ -1,0 +1,16 @@
+tcp      6 59 TIME_WAIT src=127.0.0.1 dst=127.0.0.1 sport=36194 dport=11211 src=127.0.0.1 dst=127.0.0.1 sport=11211 dport=36194 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 0 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=37317 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=37317 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 2 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=37391 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=37391 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 28 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=37982 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=37982 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 53 TIME_WAIT src=172.18.0.4 dst=10.0.17.80 sport=59856 dport=8800 src=10.0.17.80 dst=10.0.17.32 sport=8800 dport=59856 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 25 TIME_WAIT src=10.0.17.36 dst=10.0.17.32 sport=35744 dport=10050 src=10.0.17.32 dst=10.0.17.36 sport=10050 dport=35744 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 431994 ESTABLISHED src=172.18.0.4 dst=10.0.17.30 sport=50868 dport=5432 src=10.0.17.30 dst=10.0.17.32 sport=5432 dport=50868 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 50 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=38717 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=38717 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 31 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=38088 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=38088 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 91 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=40017 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=40017 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 68 TIME_WAIT src=127.0.0.1 dst=127.0.0.1 sport=36242 dport=11211 src=127.0.0.1 dst=127.0.0.1 sport=11211 dport=36242 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 18 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=37712 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=37712 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+tcp      6 5 TIME_WAIT src=10.0.17.80 dst=10.0.17.32 sport=37487 dport=7080 src=172.18.0.4 dst=10.0.17.80 sport=8080 dport=37487 [ASSURED] mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+udp      17 6 src=172.18.0.4 dst=77.88.8.8 sport=50723 dport=53 src=77.88.8.8 dst=10.0.17.32 sport=53 dport=50723 mark=0 secctx=system_u:object_r:unlabeled_t:s0 use=1
+
+conntrack v1.4.4 (conntrack-tools): 1792 flow entries have been shown.

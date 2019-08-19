@@ -1,1 +1,25 @@
 ---
+
+- name: "Install package: {{ zdm_conntrack_package_name }}"
+  package:
+    name: "{{ zdm_conntrack_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages
+
+
+- name: "Configure file: {{ zdm_sudoers_conf_file }}"
+  lineinfile:
+    path: "{{ zdm_sudoers_conf_file }}"
+    owner: root
+    group: root
+    mode: 0640
+    create: yes
+    line: "{{ item }}"
+  with_items:
+    - "zabbix ALL=(root) NOPASSWD: {{ zdm_cnf_conntrack_abs_path }} -L"
+    - "zabbix ALL=(root) NOPASSWD: {{ zdm_cnf_conntrack_abs_path }} -L *"
+  tags:
+    - zdm
+    - config
