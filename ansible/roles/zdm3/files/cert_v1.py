@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 20.08.2019
+# 21.08.2019
 # ----------------------------------------------------------------------------------------------------------------------
 # USAGE: <addr> [<port>] [<hostname>] [<options>]
 
@@ -90,7 +90,7 @@ def get_result(addr, port, hostname, options, timeout):
             return 10
     except SSL.Error as err:
         logging.error("SSL Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
-        return 99
+        return 20
     except Exception as err:
         logging.critical("Exception :: {}\n{}".format(err, "".join(traceback.format_exc())))
         return 99
