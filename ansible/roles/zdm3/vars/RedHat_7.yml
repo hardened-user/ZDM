@@ -4,10 +4,12 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # NOTE: Currently there is no python34-memcached package in CentOS 7.
 zdm_python_memcached_package_name: "python34-pip"
-zdm_python_openssl_package_name: "pyOpenSSL"
+# NOTE: Currently there is no python34-pyOpenSSL package in CentOS 7.
+zdm_python_openssl_package_name: "python34-pip"
 zdm_python_requests_package_name: "python34-requests"
 zdm_mail_log_file: "/var/log/maillog"
 zdm_sysstat_package_name: "sysstat"
 zdm_ca_cert_package_name: "ca-certificates"
+zdm_ca_cert_file: "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
 zdm_pflogsumm_package_name: "postfix-perl-scripts"
 zdm_conntrack_package_name: "conntrack-tools"

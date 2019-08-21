@@ -41,6 +41,11 @@ zdm_cnf_ping_version: "20121221"
 zdm_cnf_ping_cmd: "ping -n -W5 -i 0.3 -c4 '{ADDR}' 2>&1"
 zdm_cnf_ping_cache_ttl: 29
 
+# cert -----------------------------------------------------------------------------------------------------------------
+zdm_cnf_cert_version: "1"
+zdm_cnf_cert_ca_file: "{{ zdm_ca_cert_file }}"
+zdm_cnf_cert_warn_days_before_expiry: 30
+
 # gitlab ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_gitlab_version: "4"
 zdm_cnf_gitlab_cache_ttl: 29

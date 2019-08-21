@@ -1,1 +1,22 @@
 ---
+
+- name: "Install package: {{ zdm_python_openssl_package_name }}"
+  package:
+    name: "{{ zdm_python_openssl_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages
+
+
+# NOTE: Currently there is no python34-pyOpenSSL package in CentOS 7.
+- name: "PIP-34 install: pyOpenSSL"
+  pip:
+    name: "pyOpenSSL"
+    executable: pip3.4
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+  tags:
+    - zdm
+    - pip
