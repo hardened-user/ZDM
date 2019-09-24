@@ -120,11 +120,13 @@ def memcached_cmd(cmd, key_data, key_lock, ttl, timestamp, timeout, rc_expect=No
     return rd
 
 
-def memcached_fnc(fnc, fargs, key_data, key_lock, ttl, timestamp, timeout):
+def memcached_fnc(fnc, fargs, fkwargs, key, ttl, timestamp, timeout):
     """
     Выполняет функцию и заносит результат в memcached в случае успешного выполнения (not None).
     Если результат есть в кеше, то функция не выполняется, а данные отдаются из кеша.
     """
+    key_data = key + "_data"
+    key_lock = key + "_lock"
     _pid_lock = -1
     while True:
         # ______________________________________________________________________
@@ -158,7 +160,7 @@ def memcached_fnc(fnc, fargs, key_data, key_lock, ttl, timestamp, timeout):
                 sleep(0.25)
     # __________________________________________________________________________
     # Получить свежие данные
-    rd = fnc(*fargs)
+    rd = fnc(*fargs, **fkwargs)
     if rd is None:
         # Error
         pass

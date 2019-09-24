@@ -5,6 +5,7 @@
 zdm_python_memcached_package_name: "dev-python/python-memcached"
 zdm_python_openssl_package_name: "dev-python/pyopenssl"
 zdm_python_requests_package_name: "dev-python/requests"
+zdm_python_psycopg2_package_name: "dev-python/psycopg"
 zdm_mail_log_file: "/var/log/mail.log"
 zdm_sysstat_package_name: "app-admin/sysstat"
 zdm_ca_cert_package_name: "app-misc/ca-certificates"

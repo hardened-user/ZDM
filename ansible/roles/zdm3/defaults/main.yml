@@ -46,6 +46,18 @@ zdm_cnf_cert_version: "1"
 zdm_cnf_cert_ca_file: "{{ zdm_ca_cert_file }}"
 zdm_cnf_cert_warn_days_before_expiry: 30
 
+# postgres -------------------------------------------------------------------------------------------------------------
+zdm_cnf_postgres_version: "9.6"
+zdm_cnf_postgres_ls_clusters_cmd: "echo main localhost 5432"
+# With pg_lsclusters:
+# zdm_cnf_postgres_ls_clusters_cmd: |-
+#   sudo -u postgres /usr/bin/pg_lsclusters -h | awk '{print $2"_"$1,"localhost",$3}'; exit $PIPESTATUS
+zdm_cnf_postgres_dsn_user: "zabbix"
+zdm_cnf_postgres_dsn_pass: ""
+zdm_cnf_postgres_dsn_base: "postgres"
+zdm_cnf_postgres_ls_top_tables_limit: 10
+zdm_cnf_postgres_cache_ttl: 59
+
 # gitlab ---------------------------------------------------------------------------------------------------------------
 zdm_cnf_gitlab_version: "4"
 zdm_cnf_gitlab_cache_ttl: 29

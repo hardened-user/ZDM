@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 23.07.2019
+# 26.08.2019
 # ----------------------------------------------------------------------------------------------------------------------
 # USAGE: <metric> [<url>] [<ttl>] [redirects]
 
@@ -56,10 +56,10 @@ def main():
         args.redirects = False
     # __________________________________________________________________________
     if args.metric and args.url and args.ttl:
-        key_data = "{}_{}_data".format(_MODULE_NAME, args.url)
-        key_lock = "{}_{}_lock".format(_MODULE_NAME, args.url)
+        key = "{}_{}".format(_MODULE_NAME, args.url)
         fargs = (args.url, cnf_common_timeout, args.redirects)
-        rd = memcached_fnc(get_stub_status, fargs, key_data, key_lock, args.ttl, _STARTUP_TS, cnf_common_timeout)
+        fkwargs = {}
+        rd = memcached_fnc(get_stub_status, fargs, fkwargs, key, args.ttl, _STARTUP_TS, cnf_common_timeout)
         if rd is None or not isinstance(rd, str):
             print_to_zabbix("ZBX_ERROR")
             return False

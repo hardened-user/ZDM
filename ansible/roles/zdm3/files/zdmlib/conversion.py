@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 20.06.2019
+# 20.09.2019
 # ----------------------------------------------------------------------------------------------------------------------
 import datetime
 
@@ -9,9 +9,9 @@ import datetime
 # ======================================================================================================================
 def text_to_bool(text: str) -> (bool, str):
     text = text.lower()
-    if text in ['on', 'online', 'true']:
+    if text in ['on', 'online', 'true', 'yes']:
         return True
-    elif text in ['off', 'offline', 'false']:
+    elif text in ['off', 'offline', 'false', 'no']:
         return False
     # __________________________________________________________________________
     return text
@@ -33,3 +33,19 @@ def text_to_timestamp(text: str, unsigned=False) -> (int, None):
             pass
     # __________________________________________________________________________
     return None
+
+
+def text_to_int(text: str, kind: str) -> (bool, str):
+    text = text.lower()
+    # TODO
+    catalog = {
+        'zdx_level': {'ok': 0, 'information': 1, 'warning': 2, 'average': 3, 'high': 4, 'disaster': 5}
+    }
+    if kind in catalog:
+        # TODO
+        pass
+    elif kind == "all":
+        # TODO
+        pass
+    # __________________________________________________________________________
+    return text

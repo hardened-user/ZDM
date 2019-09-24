@@ -1,0 +1,24 @@
+---
+
+- name: "Install package: {{ zdm_python_psycopg2_package_name }}"
+  package:
+    name: "{{ zdm_python_psycopg2_package_name }}"
+    state: present
+  tags:
+    - zdm
+    - packages
+
+
+- debug:
+    msg:
+      - "--==========================================================================================================--"
+      - "You have to do it manually"
+      - "--==========================================================================================================--"
+      - "Grant rights to connect to all databases in pg_hba.conf:"
+      - ">> host    all    zabbix    127.0.0.1/32    md5"
+      - "Create a function in the postgres database:"
+      - ">> CREATE or REPLACE FUNCTION pg_stat_activity_zabbix() RETURNS setof pg_stat_activity as 'select * from pg_stat_activity;' LANGUAGE 'sql' SECURITY DEFINER;"
+      - ">> GRANT EXECUTE on FUNCTION pg_stat_activity_zabbix() to {{ zdm_cnf_postgres_dsn_user }};"
+  when: zdm_cnf_postgres_version == "9.6"
+  tags:
+    - zdm
