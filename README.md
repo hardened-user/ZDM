@@ -66,6 +66,7 @@ RU:
 * apache
 * conntrack
 * cert
+* postgres
 * gitlab
 
 
