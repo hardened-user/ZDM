@@ -92,7 +92,7 @@
 
 
 ### Modules Setup ------------------------------------------------------------------------------------------------------
-- name: "Include OS-specific tasks"
+- name: "Include module-specific tasks"
   include_tasks: "_{{ module_name }}.yml"
   with_items:
     - "{{ zdm_modules_enabled }}"
