@@ -23,3 +23,18 @@
   when: zdm_cnf_postgres_version == "9.6"
   tags:
     - zdm
+
+
+- debug:
+    msg:
+      - "--==========================================================================================================--"
+      - "You have to do it manually"
+      - "--==========================================================================================================--"
+      - "Grant rights to connect to all databases in pg_hba.conf:"
+      - ">> host    all    zabbix    127.0.0.1/32    md5"
+      - "Grant access for zabbix user:"
+      - ">> GRANT pg_monitor TO zabbix;"
+      - "--==========================================================================================================--"
+  when: zdm_cnf_postgres_version == "10.0"
+  tags:
+    - zdm

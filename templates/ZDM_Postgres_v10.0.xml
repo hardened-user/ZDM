@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-10-21T13:51:27Z</date>
+    <date>2019-10-21T14:39:21Z</date>
     <groups>
         <group>
             <name>Templates_ZDM3</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>ZDM_Postgres_v9.6</template>
-            <name>ZDM_Postgres_v9.6</name>
+            <template>ZDM_Postgres_v10.0</template>
+            <name>ZDM_Postgres_v10.0</name>
             <description/>
             <groups>
                 <group>
@@ -90,7 +90,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>postgres.py[ls_clusters]</key>
-                    <delay>1h</delay>
+                    <delay>1m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -1489,7 +1489,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[show,autovacuum,{#CLHOST},{#CLPORT}].last()}&lt;1 or {ZDM_Postgres_v9.6:postgres.py[show,track_counts,{#CLHOST},{#CLPORT}].last()}&lt;1</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[show,autovacuum,{#CLHOST},{#CLPORT}].last()}&lt;1 or {ZDM_Postgres_v10.0:postgres.py[show,track_counts,{#CLHOST},{#CLPORT}].last()}&lt;1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Autovacuum is badly tuned</name>
@@ -1505,7 +1505,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{TRIGGER.VALUE}=0 and {ZDM_Postgres_v9.6:postgres.py[pg_stat_activity,,{#CLHOST},{#CLPORT}].min(#3)}&gt;{ZDM_Postgres_v9.6:postgres.py[show,max_connections,{#CLHOST},{#CLPORT}].last()}*0.90 or {TRIGGER.VALUE}=1 and {ZDM_Postgres_v9.6:postgres.py[pg_stat_activity,,{#CLHOST},{#CLPORT}].max(#5)}&gt;{ZDM_Postgres_v9.6:postgres.py[show,max_connections,{#CLHOST},{#CLPORT}].last()}*0.85</expression>
+                            <expression>{TRIGGER.VALUE}=0 and {ZDM_Postgres_v10.0:postgres.py[pg_stat_activity,,{#CLHOST},{#CLPORT}].min(#3)}&gt;{ZDM_Postgres_v10.0:postgres.py[show,max_connections,{#CLHOST},{#CLPORT}].last()}*0.90 or {TRIGGER.VALUE}=1 and {ZDM_Postgres_v10.0:postgres.py[pg_stat_activity,,{#CLHOST},{#CLPORT}].max(#5)}&gt;{ZDM_Postgres_v10.0:postgres.py[show,max_connections,{#CLHOST},{#CLPORT}].last()}*0.85</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Connections limit will soon be reached</name>
@@ -1521,7 +1521,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Is not available</name>
@@ -1536,14 +1536,14 @@
                             <dependencies>
                                 <dependency>
                                     <name>Postgres: Is not running</name>
-                                    <expression>{ZDM_Postgres_v9.6:proc.num[postgres,,,checkpointer].last(0)}&lt;1</expression>
+                                    <expression>{ZDM_Postgres_v10.0:proc.num[postgres,,,checkpointer].last(0)}&lt;1</expression>
                                     <recovery_expression/>
                                 </dependency>
                             </dependencies>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[replication_clients,streaming,{#CLHOST},{#CLPORT}].last()}=0</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[replication_clients,streaming,{#CLHOST},{#CLPORT}].last()}=0</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} No replication client</name>
@@ -1558,14 +1558,14 @@
                             <dependencies>
                                 <dependency>
                                     <name>Postgres: @{#CLNAME} Is not available</name>
-                                    <expression>{ZDM_Postgres_v9.6:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
+                                    <expression>{ZDM_Postgres_v10.0:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
                                     <recovery_expression/>
                                 </dependency>
                             </dependencies>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}*10</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}*10</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Replication lag is critical</name>
@@ -1580,14 +1580,14 @@
                             <dependencies>
                                 <dependency>
                                     <name>Postgres: @{#CLNAME} Is not available</name>
-                                    <expression>{ZDM_Postgres_v9.6:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
+                                    <expression>{ZDM_Postgres_v10.0:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
                                     <recovery_expression/>
                                 </dependency>
                             </dependencies>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Replication lag is much</name>
@@ -1602,19 +1602,19 @@
                             <dependencies>
                                 <dependency>
                                     <name>Postgres: @{#CLNAME} Is not available</name>
-                                    <expression>{ZDM_Postgres_v9.6:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
+                                    <expression>{ZDM_Postgres_v10.0:postgres.py[available,,{#CLHOST},{#CLPORT}].last(0)}&lt;1</expression>
                                     <recovery_expression/>
                                 </dependency>
                                 <dependency>
                                     <name>Postgres: @{#CLNAME} Replication lag is critical</name>
-                                    <expression>{ZDM_Postgres_v9.6:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}*10</expression>
+                                    <expression>{ZDM_Postgres_v10.0:postgres.py[replication_lag,,{#CLHOST},{#CLPORT}].last()}&gt;{$PG_REPL_LAG}*10</expression>
                                     <recovery_expression/>
                                 </dependency>
                             </dependencies>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[version,,{#CLHOST},{#CLPORT}].diff(0)}&gt;0</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[version,,{#CLHOST},{#CLPORT}].diff(0)}&gt;0</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} Version was changed</name>
@@ -1657,7 +1657,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_activity,,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1669,7 +1669,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_activity,active,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1681,7 +1681,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_activity,idle in transaction,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1693,7 +1693,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_activity,idle in transaction aborted,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1705,7 +1705,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_activity,idle,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1737,7 +1737,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,temp_bytes,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1749,7 +1749,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,temp_files,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1781,7 +1781,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,xact_commit,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1793,7 +1793,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,xact_rollback,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1825,7 +1825,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_deleted,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1837,7 +1837,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_fetched,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1849,7 +1849,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_inserted,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1861,7 +1861,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_returned,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1873,7 +1873,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_updated,{#CLHOST},{#CLPORT}]</key>
                                     </item>
                                 </graph_item>
@@ -1906,7 +1906,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>postgres.py[ls_databases]</key>
-                    <delay>1h</delay>
+                    <delay>1m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -2645,7 +2645,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{ZDM_Postgres_v9.6:postgres.py[pg_stat_database,deadlocks,{#CLHOST},{#CLPORT},{#DBNAME}].last()}&gt;0</expression>
+                            <expression>{ZDM_Postgres_v10.0:postgres.py[pg_stat_database,deadlocks,{#CLHOST},{#CLPORT},{#DBNAME}].last()}&gt;0</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>Postgres: @{#CLNAME} ={#DBNAME} deadlocks detected</name>
@@ -2688,7 +2688,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,temp_bytes,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2700,7 +2700,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,temp_files,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2732,7 +2732,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,xact_commit,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2744,7 +2744,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,xact_rollback,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2776,7 +2776,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_deleted,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2788,7 +2788,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_fetched,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2800,7 +2800,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_inserted,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2812,7 +2812,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_returned,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2824,7 +2824,7 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>ZDM_Postgres_v9.6</host>
+                                        <host>ZDM_Postgres_v10.0</host>
                                         <key>postgres.py[pg_stat_database,tup_updated,{#CLHOST},{#CLPORT},{#DBNAME}]</key>
                                     </item>
                                 </graph_item>
@@ -2857,7 +2857,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>postgres.py[ls_top_tables]</key>
-                    <delay>12h</delay>
+                    <delay>12m</delay>
                     <status>1</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -3100,7 +3100,7 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{ZDM_Postgres_v9.6:proc.num[postgres,,,checkpointer].last(0)}&lt;1</expression>
+            <expression>{ZDM_Postgres_v10.0:proc.num[postgres,,,checkpointer].last(0)}&lt;1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Postgres: Is not running</name>
