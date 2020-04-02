@@ -66,9 +66,8 @@ zdm_cnf_gitlab_private_token: "*****"
 zdm_cnf_gitlab_runners_discovery_params:
   - 'name': "default"
     'per_page': 100
-    'scope': "active"
+    'status': "active"
   - 'name': "kube_runners_online"
     'per_page': 1000
-    'scope': "active"
     'status': "online"
     'tag_list': "k8s"
