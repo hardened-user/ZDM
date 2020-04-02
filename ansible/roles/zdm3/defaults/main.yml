@@ -70,6 +70,5 @@ zdm_cnf_gitlab_runners_discovery_params:
   - 'name': "kube_runners_online"
     'per_page': 1000
     'scope': "active"
-    'status': 'online'
-    'online': 'true'
+    'status': "online"
     'tag_list': "k8s"
