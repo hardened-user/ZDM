@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# 26.08.2019
+# 02.04.2020
 # ----------------------------------------------------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/api/runners.html
 # ----------------------------------------------------------------------------------------------------------------------
-# USAGE: discovery
+# USAGE: discovery <METRIC>
+# USAGE: amount <METRIC>
 # USAGE: <RUNNER> <METRIC>
 
 import os
@@ -29,7 +30,7 @@ def main():
         parser = MyArgumentParser()
         parser.add_argument("runner", action='store', default="",
                             metavar='<RUNNER>|discovery')
-        parser.add_argument("metric", action='store', default="", nargs='?',
+        parser.add_argument("metric", action='store', default="",
                             metavar='<METRIC>')
         args = parser.parse_args()
     except SystemExit:
@@ -37,9 +38,18 @@ def main():
         return False
     # __________________________________________________________________________
     # discovery
-    if args.runner == "discovery":
+    if args.runner == "discovery" and args.metric:
+        _tmp = filter(lambda x: 'name' in x, cnf_gitlab_runners_discovery_params)
+        _tmp = list(filter(lambda x: x['name'] == args.metric, _tmp))
+        if _tmp:
+            discovery_params = _tmp[0]
+        else:
+            logging.error("Unsupported metric :: {}".format(args.metric))
+            print_to_zabbix("ZBX_ERROR")
+            return False
+        #
         rd = gitlab_runners_list(cnf_gitlab_api_url, cnf_gitlab_private_token,
-                                 params=cnf_gitlab_runners_discovery_params, timeout=cnf_common_timeout)
+                                 params=discovery_params, timeout=cnf_common_timeout)
         if rd is None:
             print_to_zabbix("ZBX_ERROR")
             return False
@@ -53,6 +63,26 @@ def main():
                 "{#RUNNER_ID}": "{}".format(x['id']),
                 "{#RUNNER_DESCRIPTION}": "{}".format(x['description'])
             })
+        print_to_zabbix(result)
+        return True
+    # __________________________________________________________________________
+    # amount
+    if args.runner == "amount" and args.metric:
+        _tmp = filter(lambda x: 'name' in x, cnf_gitlab_runners_discovery_params)
+        _tmp = list(filter(lambda x: x['name'] == args.metric, _tmp))
+        if _tmp:
+            discovery_params = _tmp[0]
+        else:
+            logging.error("Unsupported metric :: {}".format(args.metric))
+            print_to_zabbix("ZBX_ERROR")
+            return False
+        #
+        rd = gitlab_runners_list(cnf_gitlab_api_url, cnf_gitlab_private_token,
+                                 params=discovery_params, timeout=cnf_common_timeout)
+        if rd is None:
+            print_to_zabbix("ZBX_ERROR")
+            return False
+        result = len(rd)
         print_to_zabbix(result)
         return True
     # __________________________________________________________________________

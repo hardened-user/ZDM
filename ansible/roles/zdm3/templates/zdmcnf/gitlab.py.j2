@@ -4,4 +4,4 @@
 cnf_gitlab_cache_ttl = {{ zdm_cnf_gitlab_cache_ttl }}
 cnf_gitlab_api_url = '''{{ zdm_cnf_gitlab_api_url }}'''
 cnf_gitlab_private_token = '''{{ zdm_cnf_gitlab_private_token }}'''
-cnf_gitlab_runners_discovery_params = {{ zdm_cnf_gitlab_runners_discovery_params }}
+cnf_gitlab_runners_discovery_params = {{ zdm_cnf_gitlab_runners_discovery_params | to_nice_json }}

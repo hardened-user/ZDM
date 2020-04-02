@@ -63,8 +63,13 @@ zdm_cnf_gitlab_version: "4"
 zdm_cnf_gitlab_cache_ttl: 29
 zdm_cnf_gitlab_api_url: "http://example.com/api/v4"
 zdm_cnf_gitlab_private_token: "*****"
-zdm_cnf_gitlab_runners_discovery_params: |-
-  {
-    'per_page': 100,
-    'scope': "active",
-  }
+zdm_cnf_gitlab_runners_discovery_params:
+  - 'name': "default"
+    'per_page': 100
+    'scope': "active"
+  - 'name': "kube_runners_online"
+    'per_page': 1000
+    'scope': "active"
+    'status': 'online'
+    'online': 'true'
+    'tag_list': "k8s"

@@ -56,8 +56,8 @@
     - "ZDM set file permissions"
   tags:
     - zdm
-    - rsync
     - pycode
+    - rsync
 
 
 # TODO: Очистка
@@ -74,6 +74,7 @@
   tags:
     - zdm
     - config
+    - tmpl
 
 
 - name: "Generate file: {{ zdm_zabbix_agent_conf_file }}"
@@ -89,6 +90,7 @@
   tags:
     - zdm
     - config
+    - tmpl
 
 
 ### Modules Setup ------------------------------------------------------------------------------------------------------
